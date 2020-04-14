@@ -3,20 +3,39 @@ namespace MagicYearCalculatorKata
 {
     public class UserInput
     {
+        UserPrompt userPrompt;
+        InputValidator inputValidator;
+
         public UserInput()
         {
+             userPrompt = new UserPrompt();
+             inputValidator = new InputValidator();
         }
 
-        //get user name
-        
-        public decimal GetValidatedAnnualSalary()
+
+        public UserInputData GetUserInputData()
+        {
+            var firstName = userPrompt.GetUserName("first");
+            var lastName = userPrompt.GetUserName("last");
+
+            var checkedSalary = GetValidatedAnnualSalary();
+            var checkedStartYear = GetValidatedStartYear();
+
+           var instanceOfUserInputData= new UserInputData(){
+                firstName = firstName,
+                lastName = lastName,
+                annualSalary = checkedSalary,
+                startYear = checkedStartYear
+            };
+            return instanceOfUserInputData;
+        }
+
+        private decimal GetValidatedAnnualSalary()
         {
             while (true)
             {
-                var userPrompt = new UserPrompt();
                 var annualSalaryString = userPrompt.GetAnnualSalary();
 
-                var inputValidator = new InputValidator();
                 decimal annualSalaryDecimal;
                 var isAnnualSalary = inputValidator.ValidateAnnualSalary(annualSalaryString, out annualSalaryDecimal);
 
@@ -31,14 +50,12 @@ namespace MagicYearCalculatorKata
         }
 
 
-        public int GetValidatedStartYear()
+        private int GetValidatedStartYear()
         {
             while (true)
             {
-                var userPrompt = new UserPrompt();
                 var startYearString = userPrompt.GetStartYear();
 
-                var inputValidator = new InputValidator();
                 int startYearInt;
                 var isStartYear = inputValidator.ValidateStartYear(startYearString, out startYearInt);
 
