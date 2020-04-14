@@ -7,16 +7,19 @@ namespace MagicYearCalculatorKata
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to the magic year calculator!");
+
+            var userInput = new UserInput();
+
             var instanceOfUserPrompt = new UserPrompt();
-            var instanceOfInputValidator = new InputValidator();
             var instanceOfUserCalculator = new Calculator();
 
+            //this can probably also go in the input class
             var firstName = instanceOfUserPrompt.GetUserName("first");
             var lastName = instanceOfUserPrompt.GetUserName("last");
 
-            //change this to reflect the new UserInput and Validator class
-            var checkedSalary = instanceOfInputValidator.GetValidatedAnnualSalary(instanceOfUserPrompt);
-            var checkedStartYear = instanceOfInputValidator.GetValidatedStartYear(instanceOfUserPrompt);
+
+            var checkedSalary = userInput.GetValidatedAnnualSalary();
+            var checkedStartYear = userInput.GetValidatedStartYear();
 
             var monthlySalary = instanceOfUserCalculator.CalculateMonthlySalary(checkedSalary);
             var magicyear = instanceOfUserCalculator.CalculateMagicYear(checkedStartYear);

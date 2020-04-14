@@ -7,33 +7,20 @@ namespace MagicYearCalculatorKata
         {
         }
 
-        public decimal GetValidatedAnnualSalary(UserPrompt incomingUserPrompt)
+        public bool ValidateAnnualSalary(string incomingUserPrompt, out decimal outAnnualSalary)
         {
-            bool isDecimal = false;
-            decimal annualSalary = 0;
-
-            while (isDecimal == false)
-            {
-                isDecimal = decimal.TryParse(incomingUserPrompt.GetAnnualSalary(), out annualSalary);
-
-            }
-            return annualSalary;
-
+          
+                bool isDecimal = decimal.TryParse(incomingUserPrompt, out var annualSalary);
+                outAnnualSalary = annualSalary;
+                return isDecimal;
         }
 
 
-        public int GetValidatedStartYear(UserPrompt incomingUserPrompt)
+        public bool ValidateStartYear(string incomingUserPrompt, out int outStartYear)
         {
-            bool isInt = false;
-            int startYear = 0;
-
-            while (isInt == false)
-            {
-                isInt = int.TryParse(incomingUserPrompt.GetStartYear(), out startYear);
-
-            }
-
-            return startYear;
+            bool isInt = int.TryParse(incomingUserPrompt, out var startYear);
+            outStartYear = startYear;
+            return isInt;
 
         }
     }
